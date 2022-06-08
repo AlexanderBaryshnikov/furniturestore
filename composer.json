@@ -6,11 +6,15 @@
     "license": "MIT",
     "require": {
         "php": "^8.0.2",
+        "coderello/laravel-nova-lang": "^1.8",
         "cviebrock/eloquent-sluggable": "^9.0",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^9.11",
+        "laravel/nova": "*",
         "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/tinker": "^2.7",
+        "optimistdigital/nova-settings": "3.5.6",
+        "optimistdigital/nova-translations-loader": "3.1.4"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.6",
@@ -63,5 +67,11 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "path",
+            "url": "./nova"
+        }
+    ]
 }

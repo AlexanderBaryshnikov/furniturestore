@@ -3,21 +3,20 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Boolean;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\Select;
 
-class Category extends Resource
+class Product extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Category::class;
+    public static $model = \App\Models\Product::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -46,64 +45,17 @@ class Category extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make(__('Name'), 'name')
+            Text::make(__('Product name'), 'name')
                 ->sortable()
                 ->rules([
                     'max:255',
                     'required',
                 ]),
 
-            Boolean::make(__('Subcategory'), 'is_subcategory')
-                ->sortable()
-                ->default(false),
+            Textarea::make(__('Description'), 'description'),
 
-
-            Select::make(__('Parent category'), 'parent_id')->searchable()->options(
-                \App\Models\Category::notSubcategory()->get()->mapWithKeys(function ($category) {
-                    return [$category['id'] => $category['name']];
-                })
-            )
-                ->default(0),
-
-            HasMany::make(__('Products'), 'products', Product::class),
-        ];
-    }
-
-    public function fieldsForIndex(NovaRequest $request)
-    {
-        return [
-            ID::make(__('ID'), 'id')->sortable(),
-
-            Text::make(__('Name'), 'name')
-                ->sortable()
-                ->rules([
-                    'max:255',
-                    'required',
-                ]),
-
-            Boolean::make(__('Subcategory'), 'is_subcategory')
-                ->sortable()
-                ->default(false),
-        ];
-    }
-
-    public function fieldsForDetail(NovaRequest $request)
-    {
-        return [
-            ID::make(__('ID'), 'id')->sortable(),
-
-            Text::make(__('Name'), 'name')
-                ->sortable()
-                ->rules([
-                    'max:255',
-                    'required',
-                ]),
-
-            Boolean::make(__('Subcategory'), 'is_subcategory')
-                ->sortable()
-                ->default(false),
-
-            HasMany::make(__('Products'), 'products', Product::class),
+            BelongsTo::make(__('Category'), 'category', Category::class)
+                ->sortable(),
         ];
     }
 
@@ -153,7 +105,7 @@ class Category extends Resource
 
     public static function label()
     {
-        return __('Categories');
+        return __('Products');
     }
 
     public static function singularLabel()

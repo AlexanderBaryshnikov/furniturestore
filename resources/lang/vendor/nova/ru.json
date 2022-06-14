@@ -423,5 +423,13 @@
     "Update attached :resource: :title": "Обновление прикреплённый :resource: :title",
     ":resource Details: :title": "Детали :resource: :title",
     "The HasOne relationship has already been filled.": "Отношение один к одному уже заполнено.",
-    "An error occured while uploading the file.": "Произошла ошибка при загрузке файла."
+    "An error occured while uploading the file.": "Произошла ошибка при загрузке файла.",
+    "Product name": "Название товара",
+    "Categories": "Категории",
+    "Category": "Категория",
+    "Subcategory": "Подкатегория",
+    "Users": "Пользователи",
+    "User": "Пользователь",
+    "Name": "Название",
+    "Parent category": "Родительская категория"
 }

@@ -6,16 +6,16 @@ use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsTo;
 
-class Property extends Resource
+class PropertyValue extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Property::class;
+    public static $model = \App\Models\PropertyValue::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -44,14 +44,15 @@ class Property extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            Text::make(__('Property'), 'name')
+            Text::make(__('Property value'), 'name')
                 ->sortable()
                 ->rules([
                     'max:255',
                     'required',
                 ]),
 
-            HasMany::make(__('Property value'), 'values', PropertyValue::class),
+            BelongsTo::make(__('Property'), 'property', Property::class)
+                ->sortable(),
         ];
     }
 
@@ -101,7 +102,7 @@ class Property extends Resource
 
     public static function label()
     {
-        return __('Properties');
+        return __('Property values');
     }
 
     public static function singularLabel()

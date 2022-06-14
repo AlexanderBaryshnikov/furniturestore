@@ -28,6 +28,11 @@ class Category extends Model
         ];
     }
 
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
+
     public function scopeSubcategory($query)
     {
         $query->where('is_subcategory', true);

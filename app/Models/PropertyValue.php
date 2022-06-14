@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Property extends Model
+class PropertyValue extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -15,8 +15,8 @@ class Property extends Model
         'name',
     ];
 
-    public function values()
+    public function property()
     {
-        return $this->hasMany(PropertyValue::class);
+        return $this->belongsTo(Property::class);
     }
 }

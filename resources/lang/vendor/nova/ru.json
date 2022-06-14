@@ -433,5 +433,7 @@
     "Name": "Название",
     "Parent category": "Родительская категория",
     "Property": "Свойство",
-    "Properties": "Свойства"
+    "Properties": "Свойства",
+    "Property value": "Значение свойства",
+    "Property values": "Значение свойств"
 }

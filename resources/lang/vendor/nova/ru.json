@@ -424,6 +424,8 @@
     ":resource Details: :title": "Детали :resource: :title",
     "The HasOne relationship has already been filled.": "Отношение один к одному уже заполнено.",
     "An error occured while uploading the file.": "Произошла ошибка при загрузке файла.",
+    "Products": "Товары",
+    "Product": "Товар",
     "Product name": "Название товара",
     "Categories": "Категории",
     "Category": "Категория",
@@ -435,5 +437,6 @@
     "Property": "Свойство",
     "Properties": "Свойства",
     "Property value": "Значение свойства",
-    "Property values": "Значение свойств"
+    "Property values": "Значение свойств",
+    "Description": "Описание"
 }

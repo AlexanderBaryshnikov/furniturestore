@@ -423,5 +423,13 @@
     "Update attached :resource: :title": "Update attached :resource: :title",
     ":resource Details: :title": ":resource Details: :title",
     "The HasOne relationship has already been filled.": "The HasOne relationship has already been filled.",
-    "An error occured while uploading the file.": "An error occured while uploading the file."
+    "An error occured while uploading the file.": "An error occured while uploading the file.",
+    "Product name": "Product name",
+    "Categories": "Categories",
+    "Category": "Category",
+    "Subcategory": "Subcategory",
+    "Users": "Users",
+    "User": "User",
+    "Name": "Name",
+    "Parent category": "Parent category"
 }

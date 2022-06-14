@@ -28,4 +28,18 @@ class Category extends Model
         ];
     }
 
+    public function scopeSubcategory($query)
+    {
+        $query->where('is_subcategory', true);
+    }
+
+    public function scopeNotSubcategory($query)
+    {
+        $query->where('is_subcategory', false);
+    }
+
+    public function scopeParentCategory($query)
+    {
+        $query->where('parent_id', '!=', 0);
+    }
 }

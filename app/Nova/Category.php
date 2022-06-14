@@ -3,20 +3,20 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\Gravatar;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Password;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\Select;
 
-class User extends Resource
+class Category extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\User::class;
+    public static $model = \App\Models\Category::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
@@ -31,7 +31,7 @@ class User extends Resource
      * @var array
      */
     public static $search = [
-        'id', 'name', 'email',
+        'name',
     ];
 
     /**
@@ -43,24 +43,61 @@ class User extends Resource
     public function fields(Request $request)
     {
         return [
-            ID::make()->sortable(),
+            ID::make(__('ID'), 'id')->sortable(),
 
-            Gravatar::make()->maxWidth(50),
-
-            Text::make('Name')
+            Text::make(__('Name'), 'name')
                 ->sortable()
-                ->rules('required', 'max:255'),
+                ->rules([
+                    'max:255',
+                    'required',
+                ]),
 
-            Text::make('Email')
+            Boolean::make(__('Subcategory'), 'is_subcategory')
                 ->sortable()
-                ->rules('required', 'email', 'max:254')
-                ->creationRules('unique:users,email')
-                ->updateRules('unique:users,email,{{resourceId}}'),
+                ->default(false),
 
-            Password::make('Password')
-                ->onlyOnForms()
-                ->creationRules('required', 'string', 'min:8')
-                ->updateRules('nullable', 'string', 'min:8'),
+
+            Select::make(__('Parent category'), 'parent_id')->searchable()->options(
+                \App\Models\Category::notSubcategory()->get()->mapWithKeys(function ($category) {
+                    return [$category['id'] => $category['name']];
+                })
+            ),
+        ];
+    }
+
+    public function fieldsForIndex(NovaRequest $request)
+    {
+        return [
+            ID::make(__('ID'), 'id')->sortable(),
+
+            Text::make(__('Name'), 'name')
+                ->sortable()
+                ->rules([
+                    'max:255',
+                    'required',
+                ]),
+
+            Boolean::make(__('Subcategory'), 'is_subcategory')
+                ->sortable()
+                ->default(false),
+        ];
+    }
+
+    public function fieldsForDetail(NovaRequest $request)
+    {
+        return [
+            ID::make(__('ID'), 'id')->sortable(),
+
+            Text::make(__('Name'), 'name')
+                ->sortable()
+                ->rules([
+                    'max:255',
+                    'required',
+                ]),
+
+            Boolean::make(__('Subcategory'), 'is_subcategory')
+                ->sortable()
+                ->default(false),
         ];
     }
 
@@ -110,12 +147,12 @@ class User extends Resource
 
     public static function label()
     {
-        return __('Users');
+        return __('Categories');
     }
 
     public static function singularLabel()
     {
-        return __('Users');
+        return __('Categories');
     }
 
     public static function redirectAfterCreate(NovaRequest $request, $resource)

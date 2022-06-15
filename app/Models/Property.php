@@ -19,4 +19,9 @@ class Property extends Model
     {
         return $this->hasMany(PropertyValue::class);
     }
+
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_property')->withPivot('property_value_id');
+    }
 }

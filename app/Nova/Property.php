@@ -4,9 +4,11 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use Laravel\Nova\Fields\HasMany;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class Property extends Resource
 {
@@ -52,6 +54,14 @@ class Property extends Resource
                 ]),
 
             HasMany::make(__('Property value'), 'values', PropertyValue::class),
+
+            BelongsToMany::make(__('Products'), 'Products', Product::class)->fields(function () {
+                return [
+                    Select::make(__('Property value'), 'property_value_id')->options(
+                        \App\Models\PropertyValue::where('property_id', $this->id)->get()->pluck('name', 'id')
+                    ),
+                ];
+            })->allowDuplicateRelations(),
         ];
     }
 

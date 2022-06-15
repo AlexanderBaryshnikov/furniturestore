@@ -5,9 +5,11 @@ namespace App\Nova;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\ID;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Laravel\Nova\Fields\BelongsToMany;
 
 class Product extends Resource
 {
@@ -56,6 +58,14 @@ class Product extends Resource
 
             BelongsTo::make(__('Category'), 'category', Category::class)
                 ->sortable(),
+
+            BelongsToMany::make(__('Properties'), 'Properties', Property::class)->fields(function () {
+                return [
+                    Select::make(__('Property value'), 'property_value_id')->options(
+                        \App\Models\PropertyValue::all()->pluck('name', 'id')
+                    ),
+                ];
+            })->allowDuplicateRelations(),
         ];
     }
 

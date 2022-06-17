@@ -25,4 +25,9 @@ class Product extends Model
     {
         return $this->belongsToMany(Property::class, 'product_property')->withPivot('property_value_id');
     }
+
+    public function offers()
+    {
+        return $this->hasMany(Offer::class);
+    }
 }

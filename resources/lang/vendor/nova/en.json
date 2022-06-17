@@ -438,5 +438,9 @@
     "Properties": "Properties",
     "Property value": "Property value",
     "Property values": "Property values",
-    "Description": "Description"
+    "Description": "Description",
+    "Price": "Price",
+    "Quantity": "Quantity",
+    "Offers": "Offers",
+    "Offer": "Offer"
 }

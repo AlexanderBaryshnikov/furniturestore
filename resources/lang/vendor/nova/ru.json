@@ -438,5 +438,9 @@
     "Properties": "Свойства",
     "Property value": "Значение свойства",
     "Property values": "Значение свойств",
-    "Description": "Описание"
+    "Description": "Описание",
+    "Price": "Цена",
+    "Quantity": "Количество",
+    "Offers": "Товарные предложения",
+    "Offer": "Товарное предложение"
 }

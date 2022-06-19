@@ -64,7 +64,7 @@ class Offer extends Resource
                 ->rules([
                     'max:255',
                     'required',
-                    'unique:offers'
+                    'unique:offers,sku,' . $this->id,
                 ]),
 
             Number::make(__('Price'), 'price')
@@ -124,7 +124,9 @@ class Offer extends Resource
      */
     public function actions(Request $request)
     {
-        return [];
+        return [
+            new Actions\ProductPropertyRelations,
+        ];
     }
 
     public static function label()

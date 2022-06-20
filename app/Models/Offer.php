@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Offer extends Model
+class Offer extends Model implements HasMedia
 {
     use HasFactory;
     use SoftDeletes;
     use Sluggable;
+    use InteractsWithMedia;
 
     protected $fillable = [
         'properties',
@@ -28,6 +31,12 @@ class Offer extends Model
                 'source' => ['product.name', 'sku']
             ]
         ];
+    }
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('offer')
+            ->singleFile();
     }
 
     public function product()

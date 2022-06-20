@@ -442,5 +442,7 @@
     "Price": "Price",
     "Quantity": "Quantity",
     "Offers": "Offers",
-    "Offer": "Offer"
+    "Offer": "Offer",
+    "Images": "Images",
+    "Image": "Image"
 }

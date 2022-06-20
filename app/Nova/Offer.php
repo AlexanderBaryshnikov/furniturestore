@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\Number;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use OptimistDigital\MultiselectField\Multiselect;
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 
 class Offer extends Resource
 {
@@ -79,6 +80,16 @@ class Offer extends Resource
                 ->rules([
                     'min:1',
                     'required',
+                ]),
+
+            Medialibrary::make(__('Image'), 'offer')
+                ->single()
+                ->sortable()
+                ->attachExisting('offer')
+                ->accept('image/*')
+                ->withMeta([
+                    'textAlign' => 'center justify-center',
+                    'indexPreviewClassList' => 'rounded w-full h-12 p-2',
                 ]),
         ];
     }

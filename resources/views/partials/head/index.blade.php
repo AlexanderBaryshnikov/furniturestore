@@ -7,6 +7,7 @@
     <meta name="csrf" content="{{ csrf_token() }}"/>
 
     <link rel="shortcut icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="{{ mix('css/style.css') }}">
 
     <!-- Google Font -->
     <link href='https://fonts.googleapis.com/css?family=Lato:400,700,900' rel='stylesheet' type='text/css'>

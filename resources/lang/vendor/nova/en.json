@@ -444,5 +444,7 @@
     "Offers": "Offers",
     "Offer": "Offer",
     "Images": "Images",
-    "Image": "Image"
+    "Image": "Image",
+    "Color": "Color",
+    "Background color": "Background color"
 }

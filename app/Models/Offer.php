@@ -44,6 +44,11 @@ class Offer extends Model implements HasMedia
         return $this->belongsTo(Product::class);
     }
 
+    public function labels()
+    {
+        return $this->belongsToMany(Label::class, 'label_offer');
+    }
+
     public static function getAllPropertiesList()
     {
         return self::parseProperties(self::getAllProperties());

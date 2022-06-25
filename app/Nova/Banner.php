@@ -3,30 +3,28 @@
 namespace App\Nova;
 
 use Illuminate\Http\Request;
-use Laravel\Nova\Fields\BelongsTo;
-use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
-use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
+use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
-use OptimistDigital\MultiselectField\Multiselect;
 use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 
-class Offer extends Resource
+class Banner extends Resource
 {
     /**
      * The model the resource corresponds to.
      *
      * @var string
      */
-    public static $model = \App\Models\Offer::class;
+    public static $model = \App\Models\Banner::class;
 
     /**
      * The single value that should be used to represent the resource when being displayed.
      *
      * @var string
      */
-    public static $title = 'id';
+    public static $title = 'title';
 
     /**
      * The columns that should be searched.
@@ -34,7 +32,7 @@ class Offer extends Resource
      * @var array
      */
     public static $search = [
-        'id',
+        'title',
     ];
 
     /**
@@ -48,52 +46,39 @@ class Offer extends Resource
         return [
             ID::make(__('ID'), 'id')->sortable(),
 
-            BelongsTo::make(__('Product'), 'product', Product::class)
-                ->sortable()
-                ->rules([
-                    'required',
-                ]),
-
-            Multiselect::make(__('Properties'), 'properties')
-                ->options(
-                    \App\Models\PropertyValue::all()->pluck('name', 'id')
-                )->rules([
-                    'required',
-                ]),
-
-            Text::make('SKU', 'sku')
-                ->sortable()
-                ->rules([
-                    'max:255',
-                    'required',
-                    'unique:offers,sku,' . $this->id,
-                ]),
-
-            Number::make(__('Price'), 'price')
-                ->sortable()
-                ->rules([
-                    'min:1',
-                    'required',
-                ]),
-
-            Number::make(__('Quantity'), 'quantity')
-                ->sortable()
-                ->rules([
-                    'min:1',
-                    'required',
-                ]),
-
-            Medialibrary::make(__('Image'), 'offers')
+            Medialibrary::make(__('Image'), 'banners')
                 ->single()
-                ->sortable()
-                ->attachExisting('offers')
+                ->attachExisting('banners')
                 ->accept('image/*')
                 ->withMeta([
                     'textAlign' => 'center justify-center',
                     'indexPreviewClassList' => 'rounded w-full h-12 p-2',
+                    'detailsPreviewClassList' => 'w-32 h-24 rounded-b',
+                ])
+                ->autouploading(),
+
+            Text::make(__('Title'), 'title')
+                ->sortable()
+                ->rules([
+                    'max:255',
+                    'required',
                 ]),
 
-            BelongsToMany::make('Labels', 'labels', Label::class),
+            Textarea::make(__('Subtitle'), 'subtitle'),
+
+            Textarea::make(__('Text'), 'text'),
+
+            Text::make(__('Link'), 'link'),
+
+            Text::make(__('Button text'), 'btn_text'),
+
+            Select::make(__('Site page'), 'type')->options([
+                \App\Models\Banner::TYPE_HOME => 'Главная',
+                \App\Models\Banner::TYPE_PRODUCT => 'Товар',
+            ])
+                ->rules([
+                    'required',
+                ]),
         ];
     }
 
@@ -138,14 +123,12 @@ class Offer extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new Actions\ProductPropertyRelations,
-        ];
+        return [];
     }
 
     public static function label()
     {
-        return __('Offers');
+        return __('Banners');
     }
 
     public static function singularLabel()

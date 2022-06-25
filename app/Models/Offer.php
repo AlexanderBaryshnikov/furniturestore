@@ -9,6 +9,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Offer extends Model implements HasMedia
 {
@@ -33,9 +34,14 @@ class Offer extends Model implements HasMedia
         ];
     }
 
+    public function registerMediaConversions(Media $media = null): void
+    {
+        $this->addMediaConversion('offers');
+    }
+
     public function registerMediaCollections(): void
     {
-        $this->addMediaCollection('offer')
+        $this->addMediaCollection('offers')
             ->singleFile();
     }
 

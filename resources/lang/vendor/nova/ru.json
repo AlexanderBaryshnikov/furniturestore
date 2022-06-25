@@ -446,5 +446,13 @@
     "Images": "Изображения",
     "Image": "Изображение",
     "Color": "Цвет",
-    "Background color": "Цвет фона"
+    "Background color": "Цвет фона",
+    "Title": "Заголовок",
+    "Subtitle": "Подзаголовок",
+    "Text": "Текст",
+    "Link": "Ссылка",
+    "Button text": "Текст на кнопке",
+    "Banners": "Баннеры",
+    "Banner": "Баннер",
+    "Site page": "Страница сайта"
 }

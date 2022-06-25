@@ -446,5 +446,13 @@
     "Images": "Images",
     "Image": "Image",
     "Color": "Color",
-    "Background color": "Background color"
+    "Background color": "Background color",
+    "Title": "Title",
+    "Subtitle": "Subtitle",
+    "Text": "Text",
+    "Link": "Link",
+    "Button text": "Button text",
+    "Banners": "Banners",
+    "Banner": "Banner",
+    "Site page": "Site page"
 }

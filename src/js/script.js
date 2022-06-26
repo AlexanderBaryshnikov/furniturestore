@@ -23,9 +23,32 @@ $(document).ready(function ($) {
         }
     })($);
 
-    var app = (function ($, productsSlider) {
+    var mainMenu = (function ($) {
+        var open = function (item) {
+            item.addClass('active');
+            $('.js_main-menu').animate({ left: '0' }, 500);
+        }
+        var close = function (item) {
+            item.removeClass('active');
+            $('.js_main-menu').animate({ left: '-225px' }, 500);
+        }
+        var listen = function () {
+            $('.js_menu-toggle').on('click', function() {
+                $(this).hasClass('active') ? close($(this)) : open($(this));
+            });
+        }
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var app = (function ($, productsSlider, mainMenu) {
         var construct = function () {
             productsSlider.init();
+            mainMenu.init();
         };
 
         var listen = function () {
@@ -39,7 +62,7 @@ $(document).ready(function ($) {
         return {
             init: init
         }
-    }($, productsSlider));
+    }($, productsSlider, mainMenu));
 
     app.init();
 });

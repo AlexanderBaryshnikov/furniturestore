@@ -28,6 +28,20 @@ class Category extends Model
         ];
     }
 
+    public static function categoriesList()
+    {
+        $subcategories = self::subcategory()
+            ->get();
+        $categories = self::parentCategory()
+            ->get();
+        foreach ($categories as $category) {
+            if ($subcategories->contains('parent_id', $category->id)) {
+                $category['subcategories'] = $subcategories->where('parent_id', $category->id);
+            }
+        }
+        return $categories;
+    }
+
     public function products()
     {
         return $this->hasMany(Product::class);
@@ -45,6 +59,6 @@ class Category extends Model
 
     public function scopeParentCategory($query)
     {
-        $query->where('parent_id', '!=', 0);
+        $query->where('parent_id', 0);
     }
 }

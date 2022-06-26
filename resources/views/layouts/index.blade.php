@@ -3,6 +3,7 @@
 @include('partials.head.index')
 <body>
 <div class="wrapper bg-dark-white">
+    @include('partials.header.index')
     @yield('content')
 </div>
 @include('partials.js.index')

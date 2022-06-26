@@ -301,10 +301,13 @@ pre {
     visibility: hidden;
     width: 250px;
 }
-.main-menu ul li:hover .sub-menu {
+.main-menu ul li:hover > .sub-menu {
     left: 100%;
     opacity: 1;
     visibility: visible;
+}
+.parent-sub-menu {
+    position: relative;
 }
 .main-menu ul li .sub-menu > ul > li a {
     color: #999;
@@ -314,7 +317,7 @@ pre {
     line-height: 28px;
     text-transform: uppercase;
 }
-.main-menu ul li .sub-menu > ul > li:hover a {
+.main-menu ul li .sub-menu > ul > li a:hover {
     color: #c8a165;
 }
 .sub-menu ul li:last-child {

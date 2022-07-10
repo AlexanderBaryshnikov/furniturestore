@@ -2,4 +2,5 @@
 
 @section('content')
     @include('partials.featured-products.index')
+    @include('partials.purchase-online.index')
 @endsection

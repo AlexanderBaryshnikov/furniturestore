@@ -1095,6 +1095,11 @@ pre {
     bottom: 0;
     visibility: visible;
 }
+.post-text {
+    height: 80px;
+    margin: 0 0 15px;
+    overflow: hidden;
+}
 .brand-logo-area {
     margin-bottom: -50px;
 }

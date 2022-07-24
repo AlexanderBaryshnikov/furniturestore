@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "965d431321da1a8ddcbf4249659413ec",
+    "content-hash": "93652095c29671fcc5cf6e7827d891d3",
     "packages": [
         {
             "name": "brick/math",
@@ -1162,6 +1162,53 @@
                 }
             ],
             "time": "2022-05-28T22:19:18+00:00"
+        },
+        {
+            "name": "emilianotisato/nova-tinymce",
+            "version": "1.2.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/emilianotisato/nova-tinymce.git",
+                "reference": "d133bb5dd49be7239bef17f366597439f1943923"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/emilianotisato/nova-tinymce/zipball/d133bb5dd49be7239bef17f366597439f1943923",
+                "reference": "d133bb5dd49be7239bef17f366597439f1943923",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.1.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Emilianotisato\\NovaTinyMCE\\FieldServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Emilianotisato\\NovaTinyMCE\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "This Nova package allow you to use TinyMCE editor for text areas.You can customize the editor options and... you can upload images to your server and put them rigth there on the text without leaving the text editor!",
+            "keywords": [
+                "editor",
+                "laravel",
+                "nova",
+                "tiny"
+            ],
+            "support": {
+                "issues": "https://github.com/emilianotisato/nova-tinymce/issues",
+                "source": "https://github.com/emilianotisato/nova-tinymce/tree/1.2.0"
+            },
+            "time": "2021-01-13T14:00:01+00:00"
         },
         {
             "name": "fruitcake/php-cors",

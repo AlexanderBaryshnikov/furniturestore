@@ -16,7 +16,6 @@ return new class extends Migration
         Schema::create('offers', function (Blueprint $table) {
             $table->id();
             $table->foreignId('product_id')->constrained('products')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->text('properties');
             $table->string('slug', 255);
             $table->string('sku', 255);
             $table->unsignedInteger('price');

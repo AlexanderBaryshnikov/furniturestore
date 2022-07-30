@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Property extends Model
@@ -15,13 +17,13 @@ class Property extends Model
         'name',
     ];
 
-    public function values()
+    public function values(): HasMany
     {
         return $this->hasMany(PropertyValue::class);
     }
 
-    public function products()
+    public function offers(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_property')->withPivot('property_value_id');
+        return $this->belongsToMany(Offer::class, 'offer_property')->withPivot('property_value_id');
     }
 }

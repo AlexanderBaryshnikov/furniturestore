@@ -55,7 +55,7 @@ class Property extends Resource
 
             HasMany::make(__('Property value'), 'values', PropertyValue::class),
 
-            BelongsToMany::make(__('Products'), 'Products', Product::class)->fields(function () {
+            BelongsToMany::make(__('Offers'), 'offers', Offer::class)->fields(function () {
                 return [
                     Select::make(__('Property value'), 'property_value_id')->options(
                         \App\Models\PropertyValue::where('property_id', $this->id)->get()->pluck('name', 'id')

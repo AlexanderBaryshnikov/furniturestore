@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Illuminate\Support\Str;
@@ -45,14 +47,19 @@ class Offer extends Model implements HasMedia
             ->singleFile();
     }
 
-    public function product()
+    public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class);
     }
 
-    public function labels()
+    public function labels(): BelongsToMany
     {
         return $this->belongsToMany(Label::class, 'label_offer');
+    }
+
+    public function properties(): BelongsToMany
+    {
+        return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id');
     }
 
     public static function getAllPropertiesList()

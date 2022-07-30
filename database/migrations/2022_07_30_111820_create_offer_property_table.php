@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('product_property', function (Blueprint $table) {
+        Schema::create('offer_property', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('product_id')->constrained('products')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreignId('offer_id')->constrained('offers')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('property_id')->constrained('properties')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreignId('property_value_id')->constrained('property_values')->cascadeOnDelete()->cascadeOnUpdate();
             $table->timestamps();
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_property');
+        Schema::dropIfExists('offer_property');
     }
 };

@@ -7,6 +7,7 @@ use Laravel\Nova\Fields\BelongsTo;
 use Laravel\Nova\Fields\BelongsToMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Number;
+use Laravel\Nova\Fields\Select;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Http\Requests\NovaRequest;
 use OptimistDigital\MultiselectField\Multiselect;
@@ -54,13 +55,6 @@ class Offer extends Resource
                     'required',
                 ]),
 
-            Multiselect::make(__('Properties'), 'properties')
-                ->options(
-                    \App\Models\PropertyValue::all()->pluck('name', 'id')
-                )->rules([
-                    'required',
-                ]),
-
             Text::make('SKU', 'sku')
                 ->sortable()
                 ->rules([
@@ -94,6 +88,14 @@ class Offer extends Resource
                 ]),
 
             BelongsToMany::make('Labels', 'labels', Label::class),
+
+            BelongsToMany::make(__('Properties'), 'properties', Property::class)->fields(function () {
+                return [
+                    Select::make(__('Property value'), 'property_value_id')->options(
+                        \App\Models\PropertyValue::all()->pluck('name', 'id')
+                    ),
+                ];
+            })->allowDuplicateRelations(),
         ];
     }
 

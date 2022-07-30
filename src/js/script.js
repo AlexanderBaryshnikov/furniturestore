@@ -45,10 +45,32 @@ $(document).ready(function ($) {
         }
     })($);
 
-    var app = (function ($, productsSlider, mainMenu) {
+    var stickyMenu = (function ($) {
+        var el = {
+            sticky: $('#sticky-menu'),
+            position: $('#sticky-menu').position()
+        }
+        var listen = function () {
+            if (el.sticky.length) {
+                el.sticky.offset().top;
+                $(window).on('scroll', function () {
+                    $(window).scrollTop() > el.position.top ? el.sticky.addClass('sticky') : el.sticky.removeClass('sticky');
+                });
+            }
+        }
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var app = (function ($, productsSlider, mainMenu, stickyMenu) {
         var construct = function () {
             productsSlider.init();
             mainMenu.init();
+            stickyMenu.init();
         };
 
         var listen = function () {
@@ -62,7 +84,7 @@ $(document).ready(function ($) {
         return {
             init: init
         }
-    }($, productsSlider, mainMenu));
+    }($, productsSlider, mainMenu, stickyMenu));
 
     app.init();
 });

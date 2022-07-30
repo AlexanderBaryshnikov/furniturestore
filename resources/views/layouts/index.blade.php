@@ -6,6 +6,7 @@
     @include('partials.header.index')
     @yield('content')
 </div>
+@include('partials.footer.index')
 @include('partials.js.index')
 </body>
 </html>

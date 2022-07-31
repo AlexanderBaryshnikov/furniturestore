@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2 class="title-border">From The Blog</h2>
+                    <h2 class="title-border">Статьи</h2>
                 </div>
             </div>
         </div>

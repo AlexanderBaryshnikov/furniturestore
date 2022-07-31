@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2 class="title-border">Featured Products</h2>
+                    <h2 class="title-border">Рекомендуемые товары</h2>
                 </div>
                 <div class="product-slider js_product-slider style-2 arrow-left-right">
                     <div class="col-12">

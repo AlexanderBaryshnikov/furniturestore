@@ -3,7 +3,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="section-title text-center">
-                    <h2 class="title-border">Purchase Online</h2>
+                    <h2 class="title-border">Купить онлайн</h2>
                 </div>
             </div>
         </div>
@@ -11,10 +11,9 @@
             <div class="col-lg-12  text-center">
                 <!-- Nav tabs -->
                 <ul class="tab-menu nav clearfix">
-                    <li><a class="active" href="#new-arrivals" data-bs-toggle="tab">New Arrivals</a></li>
-                    <li><a href="#best-seller"  data-bs-toggle="tab">Best Seller </a></li>
-                    <li><a href="#most-view" data-bs-toggle="tab">Most View </a></li>
-                    <li><a href="#discounts" data-bs-toggle="tab">Discounts</a></li>
+                    <li><a class="active" href="#new-arrivals" data-bs-toggle="tab">Новые поступления</a></li>
+                    <li><a href="#most-view" data-bs-toggle="tab">Лидеры по просмотрам</a></li>
+                    <li><a href="#discounts" data-bs-toggle="tab">Распродажа</a></li>
                 </ul>
             </div>
             <div class="col-lg-12">

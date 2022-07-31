@@ -12,6 +12,6 @@
         {!! \Illuminate\Support\Str::limit($article->text, 150)  !!}
     </div>
     @if($article->text)
-        <a href="{{ route('article', ['article' => $article->slug]) }}" class="button-2 text-dark-red">Read more...</a>
+        <a href="{{ route('article', ['article' => $article->slug]) }}" class="button-2 text-dark-red">Читать далее...</a>
     @endif
 </div>

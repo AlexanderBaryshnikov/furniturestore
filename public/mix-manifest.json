@@ -10,6 +10,7 @@
     "/js/plugins.js": "/js/plugins.js",
     "/js/slick.min.js": "/js/slick.min.js",
     "/js/wow.min.js": "/js/wow.min.js",
+    "/js/jquery.nivo.slider.js": "/js/jquery.nivo.slider.js",
     "/js/vendor/jquery-3.6.0.min.js": "/js/vendor/jquery-3.6.0.min.js",
     "/js/vendor/jquery-migrate-3.3.2.min.js": "/js/vendor/jquery-migrate-3.3.2.min.js",
     "/js/vendor/modernizr-3.11.2.min.js": "/js/vendor/modernizr-3.11.2.min.js",

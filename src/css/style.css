@@ -847,6 +847,9 @@ pre {
 .blog-photo a {
     display: block;
 }
+.article-list .blog-photo {
+    height: 200px;
+}
 .subscribe-area {
     margin-bottom: -40px;
 }

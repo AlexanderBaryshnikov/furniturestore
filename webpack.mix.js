@@ -22,6 +22,7 @@ mix.js('src/js/script.js', 'js')
     .copy('src/js/plugins.js', 'public/js/plugins.js')
     .copy('src/js/slick.min.js', 'public/js/slick.min.js')
     .copy('src/js/wow.min.js', 'public/js/wow.min.js')
+    .copy('src/js/jquery.nivo.slider.js', 'public/js/jquery.nivo.slider.js')
     .copy('src/js/vendor/jquery-3.6.0.min.js', 'public/js/vendor/jquery-3.6.0.min.js')
     .copy('src/js/vendor/jquery-migrate-3.3.2.min.js', 'public/js/vendor/jquery-migrate-3.3.2.min.js')
     .copy('src/js/vendor/modernizr-3.11.2.min.js', 'public/js/vendor/modernizr-3.11.2.min.js')
@@ -36,6 +37,8 @@ mix.js('src/js/script.js', 'js')
         'src/css/responsive.css',
         'src/css/shortcode.css',
         'src/css/slick.min.css',
+        'src/css/nivo-slider.css',
+        'src/css/preview.css',
         'src/css/style.css',
     ], 'public/css/style.css')
     .copyDirectory('src/img', 'public/img')

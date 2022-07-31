@@ -66,11 +66,39 @@ $(document).ready(function ($) {
         }
     })($);
 
-    var app = (function ($, productsSlider, mainMenu, stickyMenu) {
+    var mainSlider = (function($) {
+        var options = {
+            effect: 'random',
+            slices: 15,
+            boxCols: 8,
+            boxRows: 4,
+            animSpeed: 700,
+            pauseTime: 9000,
+            startSlide: 0,
+            directionNav: true,
+            controlNavThumbs: false,
+            pauseOnHover: false,
+            controlNav: true,
+            prevText: '<i class="zmdi zmdi-chevron-left"></i>',
+            nextText: '<i class="zmdi zmdi-chevron-right"></i>',
+        };
+        var listen = function () {
+            $('#ensign-nivoslider').nivoSlider(options);
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var app = (function ($, productsSlider, mainMenu, stickyMenu, mainSlider) {
         var construct = function () {
             productsSlider.init();
             mainMenu.init();
             stickyMenu.init();
+            mainSlider.init();
         };
 
         var listen = function () {
@@ -84,7 +112,7 @@ $(document).ready(function ($) {
         return {
             init: init
         }
-    }($, productsSlider, mainMenu, stickyMenu));
+    }($, productsSlider, mainMenu, stickyMenu, mainSlider));
 
     app.init();
 });

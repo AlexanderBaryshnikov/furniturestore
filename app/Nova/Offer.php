@@ -78,7 +78,6 @@ class Offer extends Resource
                 ]),
 
             Medialibrary::make(__('Image'), 'offers')
-                ->single()
                 ->sortable()
                 ->attachExisting('offers')
                 ->accept('image/*')
@@ -93,7 +92,7 @@ class Offer extends Resource
                 return [
                     Select::make(__('Property value'), 'property_value_id')->options(
                         \App\Models\PropertyValue::all()->pluck('name', 'id')
-                    ),
+                    )->displayUsingLabels(),
                 ];
             })->allowDuplicateRelations(),
         ];
@@ -140,9 +139,7 @@ class Offer extends Resource
      */
     public function actions(Request $request)
     {
-        return [
-            new Actions\ProductPropertyRelations,
-        ];
+        return [];
     }
 
     public static function label()

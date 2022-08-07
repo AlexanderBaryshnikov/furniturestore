@@ -626,6 +626,9 @@ pre {
     padding-top: 15px;
     transition: all 0.5s ease 0s;
 }
+.single-product .post-title {
+    height: 54px;
+}
 .product-img {
     overflow: hidden;
     position: relative;

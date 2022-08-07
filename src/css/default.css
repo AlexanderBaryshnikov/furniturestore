@@ -63,10 +63,15 @@
 /* -----------------------------------------------------
 	Sticker / Product Label
 ----------------------------------------------------- */
+.label-wrap {
+    left: 20px;
+    position: absolute;
+    top: 20px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+}
 .pro-label {
-  left: 20px;
-  position: absolute;
-  top: 20px;
   z-index: 2;
   background: #c8a165 none repeat scroll 0 0;
   border-radius: 5px;
@@ -75,12 +80,9 @@
   line-height: 25px;
   padding: 0 10px;
   text-transform: capitalize;
-}
-.pro-label.new-label {
-  background: #c8a165 none repeat scroll 0 0;
-}
-.pro-label.sale-label {
-  background: #c87065 none repeat scroll 0 0;
+    background: none repeat scroll 0 0;
+    width: max-content;
+    margin-bottom: 10px;
 }
 .single-banner .pro-label {
   left: 30px;

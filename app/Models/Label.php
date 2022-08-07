@@ -21,4 +21,19 @@ class Label extends Model
     {
         return $this->belongsToMany(Offer::class, 'label_offer');
     }
+
+    public function scopeNewLabel($query)
+    {
+        $query->where('name', 'new');
+    }
+
+    public function scopeSaleLabel($query)
+    {
+        $query->where('name', 'sale');
+    }
+
+    public function scopeRecommendLabel($query)
+    {
+        $query->where('name', 'recommend');
+    }
 }

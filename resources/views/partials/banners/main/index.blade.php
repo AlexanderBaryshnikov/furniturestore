@@ -14,26 +14,16 @@
                         <div class="title-container s-tb-c title-compress">
                             <div class="layer-1">
                                 @if($banner->title)
-                                    <div class="wow fadeInUpBig" data-wow-duration="2.5s" data-wow-delay="0.5s">
-                                        <h2 class="slider-title1 text-uppercase mb-0"><span class="d-none d-md-block">elegent </span>
-                                            furniture</h2>
-                                    </div>
+                                    @include('partials.banners.main.title.index')
                                 @endif
                                 @if($banner->subtitle)
-                                    <div class="wow fadeInUpBig" data-wow-duration="3s" data-wow-delay="0.5s">
-                                        <h2 class="slider-title2 text-uppercase">gallery 2021</h2>
-                                    </div>
+                                    @include('partials.banners.main.subtitle.index')
                                 @endif
                                 @if($banner->text)
-                                    <div class="wow fadeInUpBig" data-wow-duration="2s" data-wow-delay="0.5s">
-                                        {!! $banner->text !!}
-                                    </div>
+                                    @include('partials.banners.main.text.index')
                                 @endif
                                 @if($banner->link)
-                                    <div class="wow fadeInUpBig" data-wow-duration="3.5s" data-wow-delay="0.5s">
-                                        <a href="{{ $banner->link }}" class="button-one style-2 text-uppercase mt-20"
-                                           data-text="Shop now">{{ $banner->btn_text ?? 'Перейти' }}</a>
-                                    </div>
+                                    @include('partials.banners.main.link.index')
                                 @endif
                             </div>
                         </div>

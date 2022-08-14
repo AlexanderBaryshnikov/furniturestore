@@ -4,6 +4,7 @@
 <body>
 <div class="wrapper bg-dark-white">
     @include('partials.header.index')
+    @include('partials.menu.main.mobile.index')
     @yield('content')
 </div>
 @include('partials.footer.index')

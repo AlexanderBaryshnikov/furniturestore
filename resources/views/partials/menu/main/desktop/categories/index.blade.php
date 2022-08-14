@@ -5,7 +5,7 @@
                 <li class="menu-title">Категории</li>
                 @foreach($categories_list as $category)
                     <li><a class="parent-sub-menu" href="{{ $category->slug }}">{{ $category->name }}</a>
-                        @include('partials.main-menu.categories.subcategories.index')
+                        @include('partials.menu.main.desktop.categories.subcategories.index')
                     </li>
                 @endforeach
             </ul>

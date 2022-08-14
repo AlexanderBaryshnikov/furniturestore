@@ -102,7 +102,7 @@ $(document).ready(function ($) {
         };
 
         var listen = function () {
-
+            $('nav#dropdown').meanmenu();
         };
 
         var init = function () {

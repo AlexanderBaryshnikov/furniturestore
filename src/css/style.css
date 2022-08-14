@@ -2176,3 +2176,12 @@ input.cart-plus-minus-box {
     padding: 30px 0;
 }
 
+.mobile-menu-area .mean-container nav ul > li > ul {
+    display: flex;
+    position: relative;
+    flex-direction: column;
+}
+.mobile-menu-area .mean-container .menu-title a {
+    font-weight: 700;
+}
+

@@ -8,7 +8,7 @@
         <ul>
             <li><a href="{{ route('home') }}">Главная</a>
             </li>
-            @include('partials.main-menu.categories.index')
+            @include('partials.menu.main.desktop.categories.index')
             <li><a href="">Статьи</a></li>
             <li><a href="">О нас</a></li>
             <li><a href="">Контакты</a></li>

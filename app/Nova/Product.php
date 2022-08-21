@@ -9,6 +9,7 @@ use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
 use Laravel\Nova\Fields\Textarea;
 use Laravel\Nova\Http\Requests\NovaRequest;
+use Emilianotisato\NovaTinyMCE\NovaTinyMCE;
 
 class Product extends Resource
 {
@@ -53,7 +54,7 @@ class Product extends Resource
                     'required',
                 ]),
 
-            Textarea::make(__('Description'), 'description'),
+            NovaTinyMCE::make(__('Description'), 'description'),
 
             BelongsTo::make(__('Category'), 'category', Category::class)
                 ->sortable(),

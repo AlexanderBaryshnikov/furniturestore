@@ -13,6 +13,6 @@ class ArticleController extends WebController
         $article = Article::where('slug', $slug)
             ->firstOrFail();
 
-        return view('article.index', compact('article'));
+        return view('pages.article.index', compact('article'));
     }
 }

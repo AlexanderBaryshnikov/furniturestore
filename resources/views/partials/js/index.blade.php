@@ -12,3 +12,4 @@
 <script src="{{ asset('js/wow.min.js') }}"></script>
 <script src="{{ asset('js/plugins.js') }}"></script>
 <script src="{{ asset('js/script.js') }}"></script>
+@livewireScripts

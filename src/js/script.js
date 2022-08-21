@@ -1,3 +1,5 @@
+import raterJs from "rater-js";
+
 $(document).ready(function ($) {
     var productsSlider = (function($) {
         var option = {
@@ -93,12 +95,118 @@ $(document).ready(function ($) {
         }
     })($);
 
-    var app = (function ($, productsSlider, mainMenu, stickyMenu, mainSlider) {
+    var offerSlider = (function ($) {
+        var listen = function () {
+            $('.slider-for').slick({slidesToShow: 1, slidesToScroll: 1, arrows: !1, fade: !0, asNavFor: '.slider-nav'}),
+            $('.slider-nav').slick({
+                slidesToShow: 4,
+                slidesToScroll: 1,
+                asNavFor: '.slider-for',
+                dots: !1,
+                arrows: !0,
+                centerMode: !1,
+                responsive: [{breakpoint: 480, settings: {slidesToShow: 2}}],
+                focusOnSelect: !0,
+                prevArrow: '<div class="single-pro-arrow arrow-left"><i class="zmdi zmdi-chevron-left"></i></div>',
+                nextArrow: '<div class="single-pro-arrow arrow-right"><i class="zmdi zmdi-chevron-right"></i></div>',
+            })
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var starsRating = (function ($) {
+        var listen = function () {
+            let starRatingsReview = document.querySelectorAll('.js_star-rating-review'),
+                starsReadOnly = document.querySelectorAll('.js_star-rating-review-readonly');
+
+            starRatingsReview.forEach(item => {
+                let reviewRating = raterJs( {
+                    element:item,
+                    rateCallback:function rateCallback(rating, done) {
+                        this.setRating(rating);
+                        done();
+                        let input = document.querySelector('.js_hidden-rating-review');
+                        if (input !== null) {
+                            input.value = rating
+                            input.dispatchEvent(new Event('input'));
+                        }
+                    },
+                    max: 5,
+                    starSize: 20,
+                    readOnly: false
+                });
+            });
+
+            starsReadOnly.forEach(item => {
+                let value = item.dataset.rating,
+                    reviewRating = raterJs( {
+                    element:item,
+                    rateCallback:function rateCallback(rating, done) {
+                        this.setRating(value);
+                    },
+                    max: 5,
+                    starSize: 20,
+                    readOnly: true
+                });
+            });
+
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var reviewType = (function ($) {
+        var listen = function () {
+            let offer_id_el = document.querySelector('.js_offer-id'),
+                article_id_el = document.querySelector('.js_article-id'),
+                offer_id_input = document.getElementById('offer_id_input'),
+                article_id_input = document.getElementById('article_id_input');
+
+            var setInputValue = function (el, input, data) {
+                let id = data
+                input.value = id;
+                input.dispatchEvent(new Event('input'));
+            }
+
+            if (offer_id_el !== null && offer_id_input !== null) {
+                setInputValue(offer_id_el, offer_id_input, offer_id_el.dataset.offerid);
+            }
+            if (article_id_el !== null && article_id_input !== null) {
+                setInputValue(article_id_el, article_id_input, offer_id_el.dataset.articleid);
+            }
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var app = (function ($,
+                         productsSlider,
+                         mainMenu,
+                         stickyMenu,
+                         mainSlider,
+                         offerSlider
+    ) {
         var construct = function () {
             productsSlider.init();
             mainMenu.init();
             stickyMenu.init();
             mainSlider.init();
+            offerSlider.init();
+            starsRating.init();
+            reviewType.init();
         };
 
         var listen = function () {
@@ -112,7 +220,7 @@ $(document).ready(function ($) {
         return {
             init: init
         }
-    }($, productsSlider, mainMenu, stickyMenu, mainSlider));
+    }($, productsSlider, mainMenu, stickyMenu, mainSlider, offerSlider));
 
     app.init();
 });

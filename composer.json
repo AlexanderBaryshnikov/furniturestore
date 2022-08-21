@@ -15,6 +15,7 @@
         "laravel/nova": "*",
         "laravel/sanctum": "^2.14.1",
         "laravel/tinker": "^2.7",
+        "livewire/livewire": "^2.10",
         "optimistdigital/nova-color-field": "1.2.2",
         "optimistdigital/nova-multiselect-field": "2.4.0",
         "optimistdigital/nova-settings": "3.5.6",

@@ -14,4 +14,5 @@
     <link href='https://fonts.googleapis.com/css?family=Bree+Serif' rel='stylesheet' type='text/css'>
 
     @stack('styles')
+    @livewireStyles
 </head>

@@ -1597,6 +1597,7 @@ input.cart-plus-minus-box {
 .single-pro-info .product-description p {
     font-weight: 400;
     margin-bottom: 30px;
+    font-size: 15px;
 }
 .single-sml-photo {
     margin-top: 38px;
@@ -1667,7 +1668,7 @@ input.cart-plus-minus-box {
     z-index: 9;
 }
 .view-full-screen::before {
-    border-right: 50px solid #fcfbfb;
+    border-right: 50px solid #fff;
     border-top: 50px solid transparent;
     bottom: 0;
     content: "";
@@ -1716,8 +1717,7 @@ input.cart-plus-minus-box {
     width: 90px;
 }
 .pro-reviewer-comment {
-    margin-left: 90px;
-    padding-left: 30px;
+    font-size: 14px;
 }
 .comment-reply a {
     background: #f6f6f6 none repeat scroll 0 0;
@@ -2183,5 +2183,12 @@ input.cart-plus-minus-box {
 }
 .mobile-menu-area .mean-container .menu-title a {
     font-weight: 700;
+}
+
+.star-rating {
+    background: url('../img/stars/star-empty-review.svg') !important;
+}
+.star-rating .star-value{
+    background: url('../img/stars/star-full-review.svg') !important;
 }
 

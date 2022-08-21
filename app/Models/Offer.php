@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Cviebrock\EloquentSluggable\Sluggable;
 use Spatie\MediaLibrary\HasMedia;
@@ -58,5 +59,10 @@ class Offer extends Model implements HasMedia
     public function properties(): BelongsToMany
     {
         return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id');
+    }
+
+    public function reviews(): HasMany
+    {
+        return $this->hasMany(Review::class);
     }
 }

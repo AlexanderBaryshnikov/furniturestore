@@ -49,7 +49,7 @@ class HomeController extends WebController
             ->orderBy('id', 'desc')
             ->get();
 
-        return view('home', compact(
+        return view('pages.home.index', compact(
             'articles',
             'banners',
             'offers',

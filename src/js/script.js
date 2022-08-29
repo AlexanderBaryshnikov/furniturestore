@@ -1,6 +1,8 @@
 import raterJs from "rater-js";
 
 $(document).ready(function ($) {
+    const axios = require('axios');
+
     var productsSlider = (function($) {
         var option = {
             speed: 300,
@@ -192,12 +194,51 @@ $(document).ready(function ($) {
         }
     })($);
 
+    var pagination = (function ($) {
+        var listen = function () {
+            let pages = document.querySelectorAll('.js_pagination-page'),
+                wrap = document.querySelector('.js_comments-inner-wrap'),
+                offer_id_el = document.querySelector('.js_offer-id');
+
+            pages.forEach(function (page) {
+                page.addEventListener('click', function (event) {
+                    event.preventDefault();
+                    let value = page.dataset.page;
+                    axios({
+                        method: 'post',
+                        url: '/ajax/review-offer',
+                        data: {
+                            id: offer_id_el.dataset.offerid ?? 1,
+                            page: value ?? 1,
+                        }
+                    })
+                        .then(function (response) {
+                            wrap.innerHTML = response.data.reviews;
+                            starsRating.init();
+                            listen();
+                        })
+                        .catch(function (error) {
+                            console.log(error);
+                        });
+                })
+            })
+
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
     var app = (function ($,
                          productsSlider,
                          mainMenu,
                          stickyMenu,
                          mainSlider,
-                         offerSlider
+                         offerSlider,
+                         axios
     ) {
         var construct = function () {
             productsSlider.init();
@@ -207,6 +248,7 @@ $(document).ready(function ($) {
             offerSlider.init();
             starsRating.init();
             reviewType.init();
+            pagination.init();
         };
 
         var listen = function () {
@@ -220,7 +262,7 @@ $(document).ready(function ($) {
         return {
             init: init
         }
-    }($, productsSlider, mainMenu, stickyMenu, mainSlider, offerSlider));
+    }($, productsSlider, mainMenu, stickyMenu, mainSlider, offerSlider, axios));
 
     app.init();
 });

@@ -1,4 +1,4 @@
-<ul class="product-comments clearfix">
+<ul class="product-comments js_comments-wrap clearfix">
     <li class="mb-30">
         <div class="pro-reviewer">
             <img src="img/reviewer/1.jpg" alt="" />

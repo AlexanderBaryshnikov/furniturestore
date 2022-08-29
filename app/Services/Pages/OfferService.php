@@ -18,7 +18,14 @@ class OfferService
     {
         return [
             'offer' => $this->offer,
-            'offer_id' => $this->offer->id
+            'offer_id' => $this->offer->id,
+            'reviews' => $this->getReviews(),
         ];
+    }
+
+    private function getReviews()
+    {
+        $per_page = 2;
+        return $this->offer->reviews()->paginate($per_page);
     }
 }

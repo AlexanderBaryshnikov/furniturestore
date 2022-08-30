@@ -8,11 +8,12 @@ use Illuminate\Http\Request;
 
 class ArticleController extends WebController
 {
-    public function index($slug)
+    public function show($slug)
     {
         $article = Article::where('slug', $slug)
             ->firstOrFail();
+        $breadcrumbs = \Breadcrumbs::render('articles.page', $article) ?? '';
 
-        return view('pages.article.index', compact('article'));
+        return view('pages.article.index', compact('article', 'breadcrumbs'));
     }
 }

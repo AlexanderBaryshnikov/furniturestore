@@ -17,7 +17,14 @@ use App\Http\Controllers\Web\OfferController;
 */
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/articles/{article:slug}', [ArticleController::class, 'index'])->name('article');
+
+Route::group([
+    'prefix' => 'articles',
+    'as' => 'articles.',
+] , function () {
+    Route::get('/', [ArticleController::class, 'index'])->name('index');
+    Route::get('/{article:slug}', [ArticleController::class, 'show'])->name('page');
+});
 
 Route::group([
     'prefix' => 'offers',

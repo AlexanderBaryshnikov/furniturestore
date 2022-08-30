@@ -4,14 +4,9 @@
             <div class="col-md-12">
                 <div class="heading-banner">
                     <div class="heading-banner-title">
-                        <h2>Single-Blog</h2>
+                        <h2>FurnitureStore</h2>
                     </div>
-                    <div class="breadcumbs pb-15">
-                        <ul>
-                            <li><a href="index.html">Home</a></li>
-                            <li>Single-Blog</li>
-                        </ul>
-                    </div>
+                    {!! $breadcrumbs ?? '' !!}
                 </div>
             </div>
         </div>

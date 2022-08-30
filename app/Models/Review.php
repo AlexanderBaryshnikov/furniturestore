@@ -19,10 +19,21 @@ class Review extends Model
         'rating',
         'offer_id',
         'offer_id',
+        'published'
     ];
 
     public function offer(): BelongsTo
     {
         return $this->belongsTo(Offer::class);
+    }
+
+    public function article(): BelongsTo
+    {
+        return $this->belongsTo(Article::class);
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->where('published', 1);
     }
 }

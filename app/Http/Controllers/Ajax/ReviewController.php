@@ -17,6 +17,7 @@ class ReviewController extends Controller
         $offer = Offer::where('id', $request->id ?? 1)
             ->first();
         $reviews = $offer->reviews()
+            ->published()
             ->paginate($per_page)
             ->setPath(route('offers.page', ['offer' => $offer->slug]));
         $data .= view('partials.offer.tabs.reviews.list.index', ['reviews' => $reviews]);

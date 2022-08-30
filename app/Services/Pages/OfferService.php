@@ -27,6 +27,6 @@ class OfferService
     private function getReviews()
     {
         $per_page = 2;
-        return $this->offer->reviews()->paginate($per_page);
+        return $this->offer->reviews()->published()->paginate($per_page);
     }
 }

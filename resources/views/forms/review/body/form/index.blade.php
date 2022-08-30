@@ -20,7 +20,7 @@
             @error('text')
             <span class="form-message error">{{ $message }}</span> @enderror
             <textarea class="custom-textarea @error('name') error @enderror" name="text" placeholder="Текст отзыва" wire:model.debounce.300ms="text"></textarea>
-            <button type="submit" data-text="submit review" class="button-one submit-button mt-20">submit review</button>
+            <button type="submit" data-text="submit review" class="button-one submit-button mt-20">Отправить</button>
         </div>
     </div>
 </form>

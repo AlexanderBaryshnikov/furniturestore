@@ -124,7 +124,7 @@ $(document).ready(function ($) {
     var starsRating = (function ($) {
         var listen = function () {
             let starRatingsReview = document.querySelectorAll('.js_star-rating-review'),
-                starsReadOnly = document.querySelectorAll('.js_star-rating-review-readonly');
+                starsReadOnly = document.querySelectorAll('.js_star-rating-readonly');
 
             starRatingsReview.forEach(item => {
                 let reviewRating = raterJs( {

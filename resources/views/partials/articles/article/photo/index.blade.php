@@ -1,5 +1,5 @@
 <div class="blog-photo">
-    <a href="#"><img src="{{ $article->getFirstMediaUrl('articles') }}" alt="" /></a>
+    <img src="{{ $article->getFirstMediaUrl('articles') }}" alt="" />
     <div class="like-share fix">
         <a href="#"><i class="zmdi zmdi-account"></i><span>Thomas</span></a>
         <a href="#"><i class="zmdi zmdi-favorite"></i><span>{{ $article->like }} Like</span></a>

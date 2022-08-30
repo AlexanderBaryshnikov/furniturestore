@@ -20,6 +20,7 @@ class OfferService
             'offer' => $this->offer,
             'offer_id' => $this->offer->id,
             'reviews' => $this->getReviews(),
+            'breadcrumbs' => \Breadcrumbs::render('offers.page', $this->offer) ?? ''
         ];
     }
 

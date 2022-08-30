@@ -12,6 +12,7 @@ use Cviebrock\EloquentSluggable\Sluggable;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Database\Eloquent\Builder;
 
 class Offer extends Model implements HasMedia
 {
@@ -64,5 +65,15 @@ class Offer extends Model implements HasMedia
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);
+    }
+
+    public function getTotalRating()
+    {
+        return ceil(Review::where([
+            ['rating', '>', 0],
+            ['offer_id', $this->id]
+        ])
+            ->published()
+            ->avg('rating'));
     }
 }

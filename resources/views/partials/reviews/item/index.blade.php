@@ -6,7 +6,7 @@
                 <p class="reply-date">{{ \Illuminate\Support\Carbon::parse($data->created_at)->translatedFormat('j F Y G:i') }}</p>
                 @if($data->rating)
                     <div class="stars-wrap star-rating">
-                        <div class="js_star-rating-review-readonly"
+                        <div class="js_star-rating-readonly"
                              data-rating="{{ $data->rating }}"></div>
                     </div>
                 @endif

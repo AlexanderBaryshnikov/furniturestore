@@ -123,8 +123,7 @@ $(document).ready(function ($) {
 
     var starsRating = (function ($) {
         var listen = function () {
-            let starRatingsReview = document.querySelectorAll('.js_star-rating-review'),
-                starsReadOnly = document.querySelectorAll('.js_star-rating-readonly');
+            let starRatingsReview = document.querySelectorAll('.js_star-rating-review');
 
             starRatingsReview.forEach(item => {
                 let reviewRating = raterJs( {
@@ -144,17 +143,56 @@ $(document).ready(function ($) {
                 });
             });
 
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var starsRatingReadOnly = (function ($) {
+        var listen = function () {
+            let starsReadOnly = document.querySelectorAll('.js_star-rating-readonly');
+
             starsReadOnly.forEach(item => {
                 let value = item.dataset.rating,
                     reviewRating = raterJs( {
-                    element:item,
-                    rateCallback:function rateCallback(rating, done) {
-                        this.setRating(value);
-                    },
-                    max: 5,
-                    starSize: 20,
-                    readOnly: true
-                });
+                        element:item,
+                        rateCallback:function rateCallback(rating, done) {
+                            this.setRating(value);
+                        },
+                        max: 5,
+                        starSize: 20,
+                        readOnly: true
+                    });
+            });
+
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var starsRatingReviewReadOnly = (function ($) {
+        var listen = function () {
+            let starsReadOnly = document.querySelectorAll('.js_star-rating-review-readonly');
+
+            starsReadOnly.forEach(item => {
+                let value = item.dataset.rating,
+                    reviewRating = raterJs( {
+                        element:item,
+                        rateCallback:function rateCallback(rating, done) {
+                            this.setRating(value);
+                        },
+                        max: 5,
+                        starSize: 20,
+                        readOnly: true
+                    });
             });
 
         };
@@ -214,7 +252,7 @@ $(document).ready(function ($) {
                     })
                         .then(function (response) {
                             wrap.innerHTML = response.data.reviews;
-                            starsRating.init();
+                            starsRatingReviewReadOnly.init();
                             listen();
                         })
                         .catch(function (error) {
@@ -247,6 +285,8 @@ $(document).ready(function ($) {
             mainSlider.init();
             offerSlider.init();
             starsRating.init();
+            starsRatingReadOnly.init();
+            starsRatingReviewReadOnly.init();
             reviewType.init();
             pagination.init();
         };

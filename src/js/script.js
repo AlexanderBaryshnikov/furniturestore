@@ -1,4 +1,6 @@
 import raterJs from "rater-js";
+import IMask from 'imask';
+import axios from "axios";
 
 $(document).ready(function ($) {
     const axios = require('axios');
@@ -270,6 +272,30 @@ $(document).ready(function ($) {
         }
     })($);
 
+    var imaskjs = (function ($) {
+        var listen = function () {
+            let input_quantity_offer = document.querySelector('.js_input-quantity-offer'),
+                quantity_offer = input_quantity_offer.dataset.quantity;
+
+            if (quantity_offer !== null && quantity_offer !== null) {
+                let mask = IMask(input_quantity_offer, {
+                    mask: Number,
+                    scale: 0,
+                    signed: false,
+                    min: 1,
+                    max: quantity_offer
+                });
+            }
+
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
     var app = (function ($,
                          productsSlider,
                          mainMenu,
@@ -289,6 +315,7 @@ $(document).ready(function ($) {
             starsRatingReviewReadOnly.init();
             reviewType.init();
             pagination.init();
+            imaskjs.init();
         };
 
         var listen = function () {

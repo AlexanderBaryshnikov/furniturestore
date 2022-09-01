@@ -21,14 +21,13 @@
     @endif
     <div class="clearfix">
         <div class="cart-plus-minus">
-            <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
+            <input type="text" value="1" name="qtybutton" class="js_input-quantity-offer cart-plus-minus-box" data-quantity="{{ $offer->quantity }}">
         </div>
         <div class="product-action clearfix">
             <a href="wishlist.html" data-bs-toggle="tooltip" data-placement="top" title="Wishlist"><i
                     class="zmdi zmdi-favorite-outline"></i></a>
             <a href="{{ $offer->getFirstMediaUrl('offers') }}" data-lightbox="roadtrip" title="Quick View"><i
                     class="zmdi zmdi-zoom-in"></i></a>
-            <a href="#" data-bs-toggle="tooltip" data-placement="top" title="Compare"><i class="zmdi zmdi-refresh"></i></a>
             <a href="cart.html" data-bs-toggle="tooltip" data-placement="top" title="Add To Cart"><i
                     class="zmdi zmdi-shopping-cart-plus"></i></a>
         </div>

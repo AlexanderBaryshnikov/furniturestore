@@ -663,7 +663,7 @@ pre {
     height: 40px;
     line-height: 40px;
     position: relative;
-    width: 25%;
+    width: 33.3%;
 }
 .product-action a::before {
     background: #999 none repeat scroll 0 0;
@@ -1474,7 +1474,7 @@ span.color.color-7 {
 .shop-list .product-action {
     float: left;
     margin: 0 0 0 20px;
-    width: 45%;
+    width: 40%;
 }
 .shop-list .product-description p {
     font-weight: 400;
@@ -1487,7 +1487,7 @@ span.color.color-7 {
     line-height: 40px;
     overflow: hidden;
     text-align: center;
-    width: 33%;
+    width: 15%;
 }
 input.cart-plus-minus-box {
     background: #f6f6f6 none repeat scroll 0 0;
@@ -1496,7 +1496,7 @@ input.cart-plus-minus-box {
     margin: 0;
     padding: 0;
     text-align: center;
-    width: 33.33%;
+    width: 100%;
 }
 .qtybutton {
     cursor: pointer;

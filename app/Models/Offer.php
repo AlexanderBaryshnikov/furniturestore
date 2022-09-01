@@ -62,6 +62,16 @@ class Offer extends Model implements HasMedia
         return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id');
     }
 
+    public function colors()
+    {
+        return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id')->wherePivot('property_id', '=', 1);
+    }
+
+    public function materials()
+    {
+        return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id')->wherePivot('property_id', '=', 2);
+    }
+
     public function reviews(): HasMany
     {
         return $this->hasMany(Review::class);

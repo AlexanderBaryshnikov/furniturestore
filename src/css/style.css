@@ -137,7 +137,8 @@ pre {
     transition: all 0.5s ease 0s;
 }
 .header-2 .logo {
-    padding: 22px 0;
+    /*padding: 22px 0;*/
+    padding: 9px 0;
 }
 .header-2 .cart-icon {
     padding: 36px 0;
@@ -2195,6 +2196,9 @@ input.cart-plus-minus-box {
 
 .star-rating {
     background: url('../img/stars/star-empty-review.svg') !important;
+}
+.single-product-block .star-rating {
+    width: max-content;
 }
 .star-rating .star-value{
     background: url('../img/stars/star-full-review.svg') !important;

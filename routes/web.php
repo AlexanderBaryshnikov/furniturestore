@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\ArticleController;
-use App\Http\Controllers\Web\OfferController;
+use App\Http\Controllers\Web\CatalogController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,9 +27,10 @@ Route::group([
 });
 
 Route::group([
-    'prefix' => 'offers',
-    'as' => 'offers.',
+    'prefix' => 'catalog',
+    'as' => 'catalog.',
 ] , function () {
-    Route::get('/', [OfferController::class, 'index'])->name('index');
-    Route::get('/{offer:slug}', [OfferController::class, 'show'])->name('page');
+    Route::get('/{category:slug?}', [CatalogController::class, 'index'])->name('index');
+    Route::get('/{category:slug}/{product:slug}', [CatalogController::class, 'product'])->name('product');
+    Route::get('/{category:slug}/{product:slug}/{offer:slug}', [CatalogController::class, 'show'])->name('offer');
 });

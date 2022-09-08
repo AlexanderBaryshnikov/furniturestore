@@ -1,6 +1,6 @@
 <div class="product-info">
     <div class="fix">
-        <h4 class="post-title floatleft">{{ $offer->product->name }}</h4>
+        <h4 class="post-title floatleft">{{ $offer->getNameWithSku() }}</h4>
         @include('partials.rating.index')
     </div>
     <div class="fix mb-20">

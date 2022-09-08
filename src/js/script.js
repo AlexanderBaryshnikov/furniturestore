@@ -235,34 +235,86 @@ $(document).ready(function ($) {
     })($);
 
     var pagination = (function ($) {
-        var listen = function () {
-            let pages = document.querySelectorAll('.js_pagination-page'),
-                wrap = document.querySelector('.js_comments-inner-wrap'),
+        var review_pagination = function () {
+            let wrap_comments = document.querySelector('.js_comments-inner-wrap'),
+                wrap_reviews_pagination = document.querySelector('.js_pagination-wrap-reviews'),
                 offer_id_el = document.querySelector('.js_offer-id');
 
-            pages.forEach(function (page) {
-                page.addEventListener('click', function (event) {
-                    event.preventDefault();
-                    let value = page.dataset.page;
-                    axios({
-                        method: 'post',
-                        url: '/ajax/review-offer',
-                        data: {
-                            id: offer_id_el.dataset.offerid ?? 1,
-                            page: value ?? 1,
-                        }
-                    })
-                        .then(function (response) {
-                            wrap.innerHTML = response.data.reviews;
-                            starsRatingReviewReadOnly.init();
-                            listen();
-                        })
-                        .catch(function (error) {
-                            console.log(error);
-                        });
-                })
-            })
+            if (wrap_reviews_pagination !== null) {
+                let reviews_pages = wrap_reviews_pagination.querySelectorAll('.js_pagination-page');
 
+                reviews_pages.forEach(function (page) {
+                    page.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        let value = page.dataset.page;
+                        axios({
+                            method: 'post',
+                            url: '/ajax/review-offer',
+                            data: {
+                                id: offer_id_el.dataset.offerid ?? 1,
+                                page: value ?? 1,
+                            }
+                        })
+                            .then(function (response) {
+                                wrap_comments.innerHTML = response.data.reviews;
+                                starsRatingReviewReadOnly.init();
+                                listen();
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    })
+                })
+            }
+        }
+        var catalog_paginations = function () {
+            let wrap_catalog = document.querySelector('.js_catalog-inner-wrap'),
+                wrap_catalog_pagination = document.querySelector('.js_pagination-wrap-catalog'),
+                category_id_el = document.querySelector('.js_category-id'),
+                list_view = document.getElementById('list-view'),
+                list_view_tab = document.querySelector('.js_catalog-tab-list-view'),
+                active_tab = list_view_tab !== null && list_view_tab.classList.contains('active') ? 2 : 1,
+                catalog_tabs = document.querySelectorAll('.js_catalog-tab-ico');
+
+                catalog_tabs.forEach(function (tab) {
+                    tab.addEventListener('shown.bs.tab', function (event) {
+                        active_tab = list_view !== null && event.target.classList.contains('js_catalog-tab-list-view') && event.target.classList.contains('active') ? 2 : 1;
+                    })
+                });
+
+
+            if (wrap_catalog_pagination !== null) {
+                let offers_pages = wrap_catalog_pagination.querySelectorAll('.js_pagination-page');
+
+                offers_pages.forEach(function (page) {
+                    page.addEventListener('click', function (event) {
+                        event.preventDefault();
+                        let value = page.dataset.page;
+                        axios({
+                            method: 'post',
+                            url: '/ajax/offers-catalog',
+                            data: {
+                                category_id: category_id_el.dataset.categoryid ?? null,
+                                page: value ?? 1,
+                                active_tab: active_tab
+                            }
+                        })
+                            .then(function (response) {
+                                wrap_catalog.innerHTML = response.data.offers;
+                                starsRatingReadOnly.init();
+                                listen();
+                            })
+                            .catch(function (error) {
+                                console.log(error);
+                            });
+                    })
+                })
+            }
+        }
+
+        var listen = function () {
+            review_pagination();
+            catalog_paginations();
         };
         var init = function () {
             listen();
@@ -275,9 +327,9 @@ $(document).ready(function ($) {
     var imaskjs = (function ($) {
         var listen = function () {
             let input_quantity_offer = document.querySelector('.js_input-quantity-offer'),
-                quantity_offer = input_quantity_offer.dataset.quantity;
+                quantity_offer = input_quantity_offer ? input_quantity_offer.dataset.quantity : null;
 
-            if (quantity_offer !== null && quantity_offer !== null) {
+            if (quantity_offer !== null && input_quantity_offer !== null) {
                 let mask = IMask(input_quantity_offer, {
                     mask: Number,
                     scale: 0,

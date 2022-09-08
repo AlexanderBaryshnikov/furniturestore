@@ -62,12 +62,12 @@ class Offer extends Model implements HasMedia
         return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id');
     }
 
-    public function colors()
+    public function colors(): BelongsToMany
     {
         return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id')->wherePivot('property_id', '=', 1);
     }
 
-    public function materials()
+    public function materials(): BelongsToMany
     {
         return $this->belongsToMany(Property::class, 'offer_property')->withPivot('property_value_id')->wherePivot('property_id', '=', 2);
     }
@@ -85,5 +85,15 @@ class Offer extends Model implements HasMedia
         ])
             ->published()
             ->avg('rating'));
+    }
+
+    public function getNameWithSku(): string
+    {
+        return $this->product->name . ' (' . $this->sku . ')';
+    }
+
+    public function scopePublished($query): void
+    {
+        $query->where('published', 1);
     }
 }

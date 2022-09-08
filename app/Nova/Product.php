@@ -4,6 +4,7 @@ namespace App\Nova;
 
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\BelongsTo;
+use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
 use Laravel\Nova\Fields\ID;
 use Laravel\Nova\Fields\Text;
@@ -60,7 +61,11 @@ class Product extends Resource
                 ->sortable(),
 
             HasMany::make(__('Offers'), 'offers', Offer::class)
+                ->sortable(),
+
+            Boolean::make(__('Published'), 'published')
                 ->sortable()
+                ->default(false),
         ];
     }
 

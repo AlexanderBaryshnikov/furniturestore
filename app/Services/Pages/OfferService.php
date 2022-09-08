@@ -9,12 +9,9 @@ use Illuminate\Http\Request;
 
 class OfferService
 {
-    private Offer $offer;
-
-    public function __construct(Offer $offer)
-    {
-        $this->offer = $offer;
-    }
+    public function __construct(
+        private Offer $offer,
+    ) {}
 
     public function getData(): array
     {
@@ -22,7 +19,7 @@ class OfferService
             'offer' => $this->offer,
             'offer_id' => $this->offer->id,
             'reviews' => $this->getReviews(),
-            'breadcrumbs' => \Breadcrumbs::render('offers.page', $this->offer) ?? '',
+            'breadcrumbs' => \Breadcrumbs::render('catalog.offer',  $this->offer->product->category, $this->offer->product, $this->offer) ?? '',
             'rating' => $this->offer->getTotalRating(),
             'colors' => ColorService::getColors($this->getProductOffers()) ?? [],
             'materials' => MaterialService::getMaterials($this->offer) ?? []

@@ -19,7 +19,7 @@ class ReviewController extends Controller
         $reviews = $offer->reviews()
             ->published()
             ->paginate($per_page)
-            ->setPath(route('offers.page', ['offer' => $offer->slug]));
+            ->setPath(route('catalog.offer', ['category' => $offer->product->category, 'product' => $offer->product, 'offer' => $offer->slug]));
         $data .= view('partials.offer.tabs.reviews.list.index', ['reviews' => $reviews]);
 
         return ['reviews' => $data, 'new_page' => $request->page];

@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Http\Controllers\Controller;
 use App\Models\Category;
 use App\Models\Offer;
 use App\Models\Product;
+use App\Services\Filter\FilterService;
 use App\Services\Pages\CatalogService;
 use App\Services\Pages\OfferService;
 use Illuminate\Http\Request;
@@ -14,7 +14,12 @@ class CatalogController extends WebController
 {
     public function index(Category $category)
     {
-        return view('pages.catalog.index', (new CatalogService($category))->getData());
+        $catalog_data = (new CatalogService($category))->getData();
+        if (!$catalog_data['count_offers']) {
+            return redirect()->route('catalog.index');
+        }
+
+        return view('pages.catalog.index', array_merge($catalog_data, (new FilterService($catalog_data))->getFilters()));
     }
 
     public function product(Category $category, Product $product)

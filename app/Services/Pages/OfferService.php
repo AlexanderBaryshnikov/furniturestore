@@ -34,6 +34,11 @@ class OfferService
 
     private function getProductOffers()
     {
-        return $this->offer->product()->first()->offers()->with('colors')->get();
+        return $this->offer->product()->first()->offers()->published()->with('colors')->get();
+    }
+
+    public static function getMaxPrice()
+    {
+        return Offer::published()->max('price');
     }
 }

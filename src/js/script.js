@@ -270,18 +270,7 @@ $(document).ready(function ($) {
         var catalog_paginations = function () {
             let wrap_catalog = document.querySelector('.js_catalog-inner-wrap'),
                 wrap_catalog_pagination = document.querySelector('.js_pagination-wrap-catalog'),
-                category_id_el = document.querySelector('.js_category-id'),
-                list_view = document.getElementById('list-view'),
-                list_view_tab = document.querySelector('.js_catalog-tab-list-view'),
-                active_tab = list_view_tab !== null && list_view_tab.classList.contains('active') ? 2 : 1,
-                catalog_tabs = document.querySelectorAll('.js_catalog-tab-ico');
-
-                catalog_tabs.forEach(function (tab) {
-                    tab.addEventListener('shown.bs.tab', function (event) {
-                        active_tab = list_view !== null && event.target.classList.contains('js_catalog-tab-list-view') && event.target.classList.contains('active') ? 2 : 1;
-                    })
-                });
-
+                category_id_el = document.querySelector('.js_category-id');
 
             if (wrap_catalog_pagination !== null) {
                 let offers_pages = wrap_catalog_pagination.querySelectorAll('.js_pagination-page');
@@ -290,23 +279,7 @@ $(document).ready(function ($) {
                     page.addEventListener('click', function (event) {
                         event.preventDefault();
                         let value = page.dataset.page;
-                        axios({
-                            method: 'post',
-                            url: '/ajax/offers-catalog',
-                            data: {
-                                category_id: category_id_el.dataset.categoryid ?? null,
-                                page: value ?? 1,
-                                active_tab: active_tab
-                            }
-                        })
-                            .then(function (response) {
-                                wrap_catalog.innerHTML = response.data.offers;
-                                starsRatingReadOnly.init();
-                                listen();
-                            })
-                            .catch(function (error) {
-                                console.log(error);
-                            });
+                        filterCatalog(value);
                     })
                 })
             }
@@ -348,6 +321,105 @@ $(document).ready(function ($) {
         }
     })($);
 
+    var catalogFilter = (function ($) {
+        var listen = function () {
+            let filter_inputs = document.querySelectorAll('.js_input-filter');
+            filter_inputs.forEach(function (input) {
+                input.addEventListener('click', function (event) {
+                    filterCatalog();
+                });
+            })
+
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    var priceSlider =  (function ($) {
+        var listen = function () {
+            let min_price = document.getElementById('min-price-range'),
+                max_price = document.getElementById('max-price-range'),
+                max_value = max_price.dataset.maxprice;
+
+            $('#slider-range').slider({
+                range: true,
+                min: 0,
+                max: max_value,
+                values: [0, max_value],
+                stop: function() {
+                    filterCatalog();
+                },
+                slide:function(event, ui) {
+                    min_price.value = ui.values[0];
+                    max_price.value = ui.values[1];
+                }
+            });
+        };
+        var init = function () {
+            listen();
+        };
+        return {
+            init: init
+        }
+    })($);
+
+    function activeTab() {
+        var list_view = document.getElementById('list-view'),
+            list_view_tab = document.querySelector('.js_catalog-tab-list-view'),
+            active_tab = list_view_tab !== null && list_view_tab.classList.contains('active') ? 2 : 1,
+            catalog_tabs = document.querySelectorAll('.js_catalog-tab-ico');
+
+        catalog_tabs.forEach(function (tab) {
+            tab.addEventListener('shown.bs.tab', function (event) {
+                active_tab = list_view !== null && event.target.classList.contains('js_catalog-tab-list-view') && event.target.classList.contains('active') ? 2 : 1;
+            })
+        });
+
+        return active_tab;
+    }
+
+    function filterCatalog(page = 1) {
+        let category_id_el = document.querySelector('.js_category-id'),
+            form = document.querySelector('.js_form-filter-catalog'),
+            wrap_catalog = document.querySelector('.js_catalog-inner-wrap'),
+            min_price = document.getElementById('min-price-range'),
+            max_price = document.getElementById('max-price-range'),
+            data = [];
+
+        form.querySelectorAll('input:checked').forEach( element => {
+            data.push({
+                property_id: element.dataset.propertyid,
+                property_value_id: element.value
+            });
+        });
+
+        axios({
+            method: 'post',
+            url: '/ajax/offers-catalog',
+            data: {
+                category_id: category_id_el.dataset.categoryid ?? null,
+                active_tab: activeTab(),
+                data: JSON.stringify(data),
+                min_price: min_price.value,
+                max_price: max_price.value,
+                page: page,
+            }
+        })
+            .then(function (response) {
+                wrap_catalog.innerHTML = response.data.offers;
+                starsRatingReadOnly.init();
+                pagination.init();
+                // catalogFilter.init();
+            })
+            .catch(function (error) {
+                alert(error);
+            });
+    }
+
     var app = (function ($,
                          productsSlider,
                          mainMenu,
@@ -368,6 +440,8 @@ $(document).ready(function ($) {
             reviewType.init();
             pagination.init();
             imaskjs.init();
+            catalogFilter.init();
+            priceSlider.init();
         };
 
         var listen = function () {

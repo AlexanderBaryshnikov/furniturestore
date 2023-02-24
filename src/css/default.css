@@ -60,6 +60,10 @@
 .price, .banner-title, .banner-brief p {
   z-index: 9;
 }
+.product-img  a {
+    height: 240px;
+    width: 100%;
+}
 /* -----------------------------------------------------
 	Sticker / Product Label
 ----------------------------------------------------- */
@@ -328,6 +332,19 @@ textarea {
 }
 .dots-bottom-right .slick-dots li.slick-active {
     background: #C8A165 none repeat scroll 0 0;
+}
+/* -----------------------------------------------------
+	Price range
+----------------------------------------------------- */
+.price_slider_amount {
+    display: flex;
+}
+.price_slider_amount .input-price {
+    display: block;
+    width: 49%;
+}
+.price_slider_amount .max-price {
+    text-align: right;
 }
 /* -----------------------------------------------------
 	Margin and Padding

@@ -34,14 +34,14 @@ class CatalogService
             'offers' => $this->getOffers(),
             'category' => $this->category,
             'count_offers' => $this->getCountOffers(),
-            'breadcrumbs' => \Breadcrumbs::render('catalog.index',  $this->category ?? null) ?? '',
+            'breadcrumbs' => \Breadcrumbs::render('catalog.category',  $this->category ?? null) ?? '',
             'builder' => $this->offers_builder
         ];
     }
 
     private function getProducts(): Collection
     {
-        return isset($this->category->id) ? $this->category->products()->with('offers')->get() : Product::published()->get();
+        return isset($this->category->id) ? $this->moveSubcategoryToCategory()->products : Product::published()->get();
     }
 
     protected function getOffersBuilder(): Builder
@@ -50,7 +50,7 @@ class CatalogService
             ->whereIn('product_id', $this->getProducts()->pluck('id'))
             ->with('product', 'properties')
             ->whereHas('product', function (Builder $query) {
-                return $query->where('published', 1);
+                return $query->published();
             });
 
         foreach ($this->properties as $key => $property) {
@@ -81,5 +81,34 @@ class CatalogService
     private function getCountOffers(): int
     {
         return $this->offers_builder->count();
+    }
+
+    private function moveSubcategoryToCategory(): Category
+    {
+        $subcategories_builder = Category::with('products')
+            ->whereHas('products', function (Builder $query) {
+                return $query->published();
+            })
+            ->subcategory();
+
+        if (isset($this->category->id)) {
+            $subcategories_builder->where('parent_id', $this->category->id);
+        }
+
+        $subcategories = $subcategories_builder->get();
+
+        if ($subcategories->contains('parent_id', $this->category->id)) {
+            $subcategories_list = $subcategories->where('parent_id', $this->category->id);
+            foreach ($subcategories_list as $item) {
+
+                if ($item->products->count()) {
+                    foreach ($item->products as $product) {
+                        $this->category->products[] = $product;
+                    }
+                }
+            }
+        }
+
+        return $this->category;
     }
 }

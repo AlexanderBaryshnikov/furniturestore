@@ -21,22 +21,28 @@ Breadcrumbs::for('articles.page', function (BreadcrumbTrail $trail, $article) {
 });
 
 // Home > Catalog
-Breadcrumbs::for('catalog.index', function (BreadcrumbTrail $trail, $category) {
+Breadcrumbs::for('catalog.index', function (BreadcrumbTrail $trail) {
     $trail->parent('home');
-    $trail->push($category->name ?? 'Каталог', route('catalog.index', ['category' => $category]));
+    $trail->push('Каталог', route('catalog.index'));
 });
 
-// Home > Catalog > [Product]
+// Home > Catalog > Category
+Breadcrumbs::for('catalog.category', function (BreadcrumbTrail $trail, $category) {
+    $trail->parent('catalog.index');
+    $trail->push($category->name ?? 'Каталог', route('catalog.category', ['category' => $category]));
+});
+
+// Home > Catalog > Category > [Product]
 Breadcrumbs::for('catalog.product', function (BreadcrumbTrail $trail, $product) {
     if ($product->category) {
-        $trail->parent('catalog.index', $product->category);
+        $trail->parent('catalog.category', $product->category);
     } else {
         $trail->parent('Товар');
     }
     $trail->push($product->name, route('catalog.product', ['category' => $product->category, 'product' => $product]));
 });
 
-// Home > Catalog > [Product] > [Offer]
+// Home > Catalog > Category > Product > [Offer]
 Breadcrumbs::for('catalog.offer', function (BreadcrumbTrail $trail,  $category, $product, $offer) {
     if ($offer->product) {
         $trail->parent('catalog.product', $offer->product);

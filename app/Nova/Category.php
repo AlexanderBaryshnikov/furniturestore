@@ -2,6 +2,7 @@
 
 namespace App\Nova;
 
+use DmitryBubyakin\NovaMedialibraryField\Fields\Medialibrary;
 use Illuminate\Http\Request;
 use Laravel\Nova\Fields\Boolean;
 use Laravel\Nova\Fields\HasMany;
@@ -66,6 +67,15 @@ class Category extends Resource
                 ->default(0),
 
             HasMany::make(__('Products'), 'products', Product::class),
+
+            Medialibrary::make(__('Image'), 'category')
+                ->sortable()
+                ->attachExisting('category')
+                ->accept('image/*')
+                ->withMeta([
+                    'textAlign' => 'center justify-center',
+                    'indexPreviewClassList' => 'rounded w-full h-12 p-2',
+                ]),
         ];
     }
 

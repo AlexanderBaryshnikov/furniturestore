@@ -30,7 +30,8 @@ Route::group([
     'prefix' => 'catalog',
     'as' => 'catalog.',
 ] , function () {
-    Route::get('/{category:slug?}', [CatalogController::class, 'index'])->name('index');
+    Route::get('/', [CatalogController::class, 'index'])->name('index');
+    Route::get('/{category:slug}', [CatalogController::class, 'category'])->name('category');
     Route::get('/{category:slug}/{product:slug}', [CatalogController::class, 'product'])->name('product');
     Route::get('/{category:slug}/{product:slug}/{offer:slug}', [CatalogController::class, 'show'])->name('offer');
 });
